@@ -14,6 +14,7 @@ import Builder, {
 	WhereQuery,
 } from "./Builder";
 import Db, { ConnectionOptions, ParseCondition } from "./Db";
+import  { Pool } from 'mysql2'
 import { empty, isArray, isBool, isInt, isObj, isPrimitive, isStr, toKeys, toUpperCase } from "./utils";
 
 export type RowRecord = {
@@ -41,6 +42,12 @@ export default class Query extends Builder {
 		delete config.prefix; //删掉前缀
 		Query.connection = Db.connect(config);
 	}
+
+
+  // 获取静态池
+  public getPool(): Pool {
+    return Query.connection.getPool();
+  }
 
 	/**
 	 * 选择表 不含好表前缀

@@ -93,6 +93,12 @@ export default class Db {
 		if(Db.config.hasOwnProperty(key)) return Db.config[key]
 		return null
 	}
+
+  // 获取静态池
+  public getPool(): Pool {
+    return Db.pool;
+  }
+
 	public async query<T>(sql:string): Promise<T>;
 	public async query<T>(sql:string, values:any[]): Promise<T>;
 	/**
