@@ -337,6 +337,14 @@ export default class Builder {
 			})
 			dataMap.push(data)
 		})
+
+    for (let i = 0; i < fields.length; i++) {
+      const v = fields[i];
+      if (['describe','desc'].indexOf(v)>-1) {
+        fields[i] = '`'+v+'`'
+      }
+    }
+
 		let inserts: string = `INSERT INTO ${currentTable} (${fields.join(',')}) VALUES ?${comment ? ` ##${comment}` : ''}`
 		return {
 			sql: inserts,
